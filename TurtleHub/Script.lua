@@ -2,6 +2,7 @@
 -- Where the sausage is made
 getgenv().autoMoney = false;
 getgenv().autoRebirth = false;
+getgenv().autoBlocks = false;
 
 -- Variables holding time to wait (These are the default time values)
 local moneyWait = 0.1
@@ -32,6 +33,17 @@ function doMoney(time)
    end)
 end
 
+local BlockNumber = 0
+function FarmBlock()
+BlockNumber = BlockNumber + 1
+local args = {
+    [1] = game:GetService("Workspace").Core.Blocks[BlockNumber].Code,
+    [2] = 10,
+    [3] = {}
+}
+
+game:GetService("ReplicatedStorage").Events.Remotes.ServerRemotes.AttackBlock:InvokeServer(unpack(args))
+end
 
 -- Trigger rebirth function
 function doRebirth(time)
@@ -88,6 +100,18 @@ PremiumOnly = false
 
 -- You have no enemies tho
 -- Money input
+
+F:AddToggle({
+Name = "Farm Blocks",
+Default = false,
+Callback = function(bool)
+getgenv().autoBlocks = bool
+    while wait() do
+    if getgenv().autoBlocks == false then break end
+    FarmBlock()
+   end
+end
+})
 
 F:AddTextbox({
 Name = "Money amount",
