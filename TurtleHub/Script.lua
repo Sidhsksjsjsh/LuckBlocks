@@ -8,6 +8,7 @@ getgenv().autoBlocks = false;
 local moneyWait = 0.1
 local rebirthWait = 0.1
 local eggWait = 2
+local ZombieNumber = 0
 
 -- Variables for money and agg amount (These are the default amount values)
 local moneyAmt = -1
@@ -33,16 +34,12 @@ function doMoney(time)
    end)
 end
 
-local BlockNumber = 0
-function FarmBlock()
-BlockNumber = BlockNumber + 1
+function FarmZombie(ZN)
 local args = {
-    [1] = game:GetService("Workspace").Core.Blocks[BlockNumber].Code,
-    [2] = 10,
-    [3] = {}
+    [1] = "Zombie_" .. ZN
 }
 
-game:GetService("ReplicatedStorage").Events.Remotes.ServerRemotes.AttackBlock:InvokeServer(unpack(args))
+game:GetService("ReplicatedStorage").Events.Remotes.ServerRemotes.AttackBoss:InvokeServer(unpack(args))
 end
 
 -- Trigger rebirth function
@@ -100,15 +97,23 @@ PremiumOnly = false
 
 -- You have no enemies tho
 -- Money input
+F:AddTextbox({
+Name = "Zombie Number",
+Default = "0",
+TextDisappear = true,
+Callback = function(value)
+    ZombieNumber = value
+end
+})
 
 F:AddToggle({
-Name = "Farm Blocks",
+Name = "Farm Zombie",
 Default = false,
 Callback = function(bool)
 getgenv().autoBlocks = bool
     while wait() do
     if getgenv().autoBlocks == false then break end
-    FarmBlock()
+    FarmZombie(ZombieNumber)
    end
 end
 })
