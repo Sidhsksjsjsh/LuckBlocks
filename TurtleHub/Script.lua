@@ -86,9 +86,7 @@ Icon = "rbxassetid://12972185585",
 PremiumOnly = false
 })
 
--- You have no enemies thorfinn
-b:DestroyGui()
-
+-- You have no enemies tho
 -- Money input
 
 F:AddTextbox({
