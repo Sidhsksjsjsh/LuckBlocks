@@ -85,13 +85,13 @@ local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = fa
 
 local F = Window:MakeTab({
 Name = "Farming",
-Icon = "rbxassetid://12972185585",
+Icon = "rbxassetid://12972185540",
 PremiumOnly = false
 })
 
 local E = Window:MakeTab({
 Name = "Egg",
-Icon = "rbxassetid://12972185585",
+Icon = "rbxassetid://12972185540",
 PremiumOnly = false
 })
 
