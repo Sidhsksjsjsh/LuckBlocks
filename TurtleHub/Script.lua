@@ -118,19 +118,12 @@ getgenv().autoBlocks = bool
 end
 })
 
-F:AddToggle({
-Name = "Farm LuckyBlocks [Teleport]",
-Default = false,
+F:AddTextbox({
+Name = "money amount",
+Default = "0",
+TextDisappear = true,
 Callback = function(value)
-   getgenv().autoBlocks = value
-   _SyncNumber = _SyncNumber + 1
-   while wait() do
-   if getgenv().autoBlocks == false then break end
-   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Workspace").Core.Blocks[_SyncNumber].Position)
-  end
-  if game:GetService("Workspace").Core.Blocks:FindFirstChild(_SyncNumber) then
-  _SyncNumber = _SyncNumber + 1
-  end
+     moneyAmt = value
 end
 })
 
