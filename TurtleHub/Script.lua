@@ -13,7 +13,7 @@ local ZombieNumber = 0
 -- Variables for money and agg amount (These are the default amount values)
 local moneyAmt = -9999999999999999999999999
 local eggAmt = 1
-
+local _SyncNumber = 0
 -- Variable to hold egg name
 local eggName
 
@@ -118,16 +118,19 @@ getgenv().autoBlocks = bool
 end
 })
 
-F:AddTextbox({
-Name = "Money amount",
-Default = "-1",
-TextDisappear = true,
+F:AddToggle({
+Name = "Farm LuckyBlocks [Teleport]",
+Default = false,
 Callback = function(value)
-if value > 0 then
-     moneyAmt = math.abs(value) * -99999999999999999999999999999999999999999999999
-else
-     moneyAmt = value
-end
+   getgenv().autoBlocks = value
+   _SyncNumber = _SyncNumber + 1
+   while wait() do
+   if getgenv().autoBlocks == false then break end
+   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Workspace").Core.Blocks[_SyncNumber].Position)
+  end
+  if game:GetService("Workspace").Core.Blocks:FindFirstChild(_SyncNumber) then
+  _SyncNumber = _SyncNumber + 1
+  end
 end
 })
 
