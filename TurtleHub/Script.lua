@@ -4,6 +4,11 @@ getgenv().autoMoney = false;
 getgenv().autoRebirth = false;
 getgenv().autoBlocks = false;
 
+local AsyncEgg = {}
+for _,EggSync in pairs(game:GetService("Workspace").Core.Eggs:GetChildren()) do
+    table.insert(AsyncEgg, EggSync.Name)
+end
+
 -- Variables holding time to wait (These are the default time values)
 local moneyWait = 0.1
 local rebirthWait = 0.1
@@ -201,7 +206,7 @@ end
 E:AddDropdown({
 Name = "Select Egg",
 Default = "Normal Egg",
-Options = { "Normal Egg", "Cow Egg", "Crystal Egg", "Mythical Egg", "Cactus Egg", "Hacked Egg", "Hellhound Egg" },
+Options = AsyncEgg,
 Callback = function(mob)
    eggName = mob
 end
